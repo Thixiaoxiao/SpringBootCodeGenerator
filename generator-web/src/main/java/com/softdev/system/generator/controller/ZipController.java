@@ -62,32 +62,33 @@ public class ZipController {
         response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(filename, "UTF-8"));
         ServletOutputStream outputStream = response.getOutputStream();
 
-        List<Map<String, String>> list = new ArrayList<>();
+        List<Map<String, String>> list = layUIJpaZipService.generateList(paramInfo);
+//        List<Map<String, String>> list = new ArrayList<>();
 
+//
+//        Map m1 = new HashMap() {{
+//            put("path", "/f1/f2/f3/");
+//            put("name", "1.txt");
+//            put("data", "abcdefg");
+//        }};
 
-        Map m1 = new HashMap() {{
-            put("path", "/f1/f2/f3/");
-            put("name", "1.txt");
-            put("data", "abcdefg");
-        }};
-
-        Map m2 = new HashMap() {{
-            put("path", "/f1/f2/f3/f4/");
-            put("name", "2.txt");
-            put("data", "abcdefg");
-        }};
-
-        Map m3 = new HashMap() {{
-            put("path", "");
-            put("name", "3.txt");
-            put("data", "abcdefg");
-        }};
-
-        list.add(m1);
-
-        list.add(m2);
-
-        list.add(m3);
+//        Map m2 = new HashMap() {{
+//            put("path", "/f1/f2/f3/f4/");
+//            put("name", "2.txt");
+//            put("data", "abcdefg");
+//        }};
+//
+//        Map m3 = new HashMap() {{
+//            put("path", "");
+//            put("name", "3.txt");
+//            put("data", "abcdefg");
+//        }};
+//
+//        list.add(m1);
+//
+//        list.add(m2);
+//
+//        list.add(m3);
 
         toZip(list, outputStream);
 
