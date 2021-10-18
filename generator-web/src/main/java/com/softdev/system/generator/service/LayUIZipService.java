@@ -19,8 +19,28 @@ public class LayUIZipService {
         ArrayList<Map<String, String>> result = new ArrayList<>();
         result.add(getMap(
                 LayUIJpaZipEnum.ENTITY.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
-                String.format(Locale.ROOT, "%s.java", className),
+                LayUIJpaZipEnum.ENTITY.getFileName(className),
                 LayUIJpaZipEnum.ENTITY.getData(paramInfo)
+        ));
+        result.add(getMap(
+                LayUIJpaZipEnum.CONTROLLER.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIJpaZipEnum.CONTROLLER.getFileName(className),
+                LayUIJpaZipEnum.CONTROLLER.getData(paramInfo)
+        ));
+        result.add(getMap(
+                LayUIJpaZipEnum.REPOSITORY.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIJpaZipEnum.REPOSITORY.getFileName(className),
+                LayUIJpaZipEnum.REPOSITORY.getData(paramInfo)
+        ));
+        result.add(getMap(
+                LayUIJpaZipEnum.LAYUI_EDIT.getZipPath(className),
+                LayUIJpaZipEnum.LAYUI_EDIT.getFileName(className),
+                LayUIJpaZipEnum.LAYUI_EDIT.getData(paramInfo)
+        ));
+        result.add(getMap(
+                LayUIJpaZipEnum.LAYUI_LIST.getZipPath(className),
+                LayUIJpaZipEnum.LAYUI_LIST.getFileName(className),
+                LayUIJpaZipEnum.LAYUI_LIST.getData(paramInfo)
         ));
         return result;
     }

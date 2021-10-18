@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="/static/lib/layui/css/layui.css" type="text/css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+</head>
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
@@ -12,17 +17,21 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">${classInfo.classComment}Id</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="${classInfo.className?uncap_first}Id" autocomplete="off" class="layui-input">
+                                <input type="text" name="${classInfo.className?uncap_first}Id" autocomplete="off"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">${classInfo.classComment}名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="${classInfo.className?uncap_first}Name" autocomplete="off" class="layui-input">
+                                <input type="text" name="${classInfo.className?uncap_first}Name" autocomplete="off"
+                                       class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button id="searchBtn" type="submit" class="layui-btn layui-btn-primary" lay-submit  lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button id="searchBtn" type="submit" class="layui-btn layui-btn-primary" lay-submit
+                                    lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -31,8 +40,9 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add">  <i class="layui-icon layui-icon-addition"></i>${classInfo.classComment} </button>
-               <#-- <button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-danger data-delete-btn" lay-event="del"> 删除${classInfo.classComment} </button>-->
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"><i
+                            class="layui-icon layui-icon-addition"></i>${classInfo.classComment} </button>
+                <#-- <button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-danger data-delete-btn" lay-event="del"> 删除${classInfo.classComment} </button>-->
             </div>
         </script>
 
@@ -61,7 +71,6 @@
         </script>
     </div>
 </div>
-<script src="￥{request.contextPath}/static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
@@ -71,7 +80,7 @@
         table.render({
             elem: '#currentTableId',
             method: 'post',
-            url: '￥{request.contextPath}/${classInfo.className?uncap_first}/list',
+            url: '/${classInfo.className?uncap_first}/list',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -82,7 +91,11 @@
                 {type: "checkbox", width: 50, fixed: "left"},
                 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
                 <#list classInfo.fieldList as fieldItem >
-                    {field: '${fieldItem.fieldName}', title: '${fieldItem.fieldComment}', sort: true}, <#if fieldItem_has_next> </#if>
+                {
+                    field: '${fieldItem.fieldName}',
+                    title: '${fieldItem.fieldComment}',
+                    sort: true
+                }, <#if fieldItem_has_next> </#if>
                 </#list>
                 </#if>
                 /* 需要时间请自行解封
@@ -91,7 +104,7 @@
                 */
                 {title: '操作', minWidth: 400, templet: '#currentTableBar', fixed: "right", align: "center"}
             ]],
-            limits: [20 , 50 , 100],
+            limits: [20, 50, 100],
             limit: 20,
             page: true
         });
@@ -126,13 +139,13 @@
                     title: '添加',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['1000px', '700px'],
-                    content: '￥{request.contextPath}/${classInfo.className?uncap_first}/edit?id=0',
+                    content: '/${classInfo.className?uncap_first}/edit?id=0',
                 });
                 return false;
-            }else if(obj.event === 'del') {
+            } else if (obj.event === 'del') {
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
@@ -155,18 +168,18 @@
                     title: '编辑',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['1000px', '700px'],
-                    content: '￥{request.contextPath}/${classInfo.className?uncap_first}/edit?id='+obj.data.${classInfo.className?uncap_first}Id,
+                    content: '/${classInfo.className?uncap_first}/edit?id=' + obj.data.${classInfo.className?uncap_first}Id,
                 });
                 return false;
             } else if (obj.event === 'delete') {
                 layer.confirm('确认删除该记录吗？', function (index) {
                     $.ajax({
                         type: 'POST',
-                        url: "￥{request.contextPath}/${classInfo.className?uncap_first}/delete",
-                        data:{"id":obj.data.${classInfo.className?uncap_first}Id},
+                        url: "/${classInfo.className?uncap_first}/delete",
+                        data: {"id": obj.data.id},
                         success: function (responseData) {
                             if (responseData.code === 200) {
                                 layer.msg(responseData.msg, function () {
@@ -180,12 +193,12 @@
                     });
                     layer.close(index);
                 });
-            }else if (obj.event === 'publish') {
+            } else if (obj.event === 'publish') {
                 layer.confirm('确定要发布吗？', function (index) {
                     $.ajax({
                         type: 'POST',
-                        url: "￥{request.contextPath}/${classInfo.className?uncap_first}/publish",
-                        data:{"id":obj.data.${classInfo.className?uncap_first}Id,"status":"1"},
+                        url: "/${classInfo.className?uncap_first}/publish",
+                        data: {"id": obj.data.id, "status": "1"},
                         success: function (responseData) {
                             searchBtn.click();
                             layer.msg(responseData.msg, function () {
@@ -194,12 +207,12 @@
                     });
                     layer.close(index);
                 });
-            }else if (obj.event === 'unpublish') {
+            } else if (obj.event === 'unpublish') {
                 layer.confirm('确定要停止吗？', function (index) {
                     $.ajax({
                         type: 'POST',
-                        url: "￥{request.contextPath}/${classInfo.className?uncap_first}/publish",
-                        data:{"id":obj.data.${classInfo.className?uncap_first}Id,"status":"0"},
+                        url: "/${classInfo.className?uncap_first}/publish",
+                        data: {"id": obj.data.id, "status": "0"},
                         success: function (responseData) {
                             searchBtn.click();
                             layer.msg(responseData.msg, function () {

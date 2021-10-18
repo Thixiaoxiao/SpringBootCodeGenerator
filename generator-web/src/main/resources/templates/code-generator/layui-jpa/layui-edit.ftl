@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="/static/lib/layui/css/layui.css" type="text/css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+</head>
 <body>
 <div class="layui-form layuimini-form">
     <input type="hidden" name="${classInfo.className?uncap_first}Id" value="" class="layui-input">
@@ -24,7 +29,6 @@
     </div>
 </div>
 </div>
-<script src="￥{request.contextPath}/static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form,
@@ -35,7 +39,7 @@
         form.on('submit(saveBtn)', function (data) {
             $.ajax({
                 type: 'POST',
-                url: "￥{request.contextPath}/${classInfo.className?uncap_first}/save",
+                url: "/${classInfo.className?uncap_first}/save",
                 data:JSON.stringify(data.field),
                 dataType: "json",
                 contentType: "application/json",

@@ -15,11 +15,21 @@ public enum LayUIJpaZipEnum {
         public String getZipPath(String packPath) {
             return String.format(Locale.ROOT, "src/main/java%sentity/", packPath);
         }
+
+        @Override
+        public String getFileName(String className) {
+            return String.format(Locale.ROOT, "%s.java", className);
+        }
     },
     CONTROLLER("controller", "jpacontroller.ftl") {
         @Override
         public String getZipPath(String packPath) {
             return String.format(Locale.ROOT, "src/main/java%scontroller/", packPath);
+        }
+
+        @Override
+        public String getFileName(String className) {
+            return String.format(Locale.ROOT, "%sController.java", className);
         }
     },
     REPOSITORY("repository", "repository.ftl") {
@@ -27,17 +37,32 @@ public enum LayUIJpaZipEnum {
         public String getZipPath(String packPath) {
             return String.format(Locale.ROOT, "src/main/java%srepository/", packPath);
         }
+
+        @Override
+        public String getFileName(String className) {
+            return String.format(Locale.ROOT, "%sRepository.java", className);
+        }
     },
     LAYUI_EDIT("templates", "layui-edit.ftl") {
         @Override
-        public String getZipPath(String packPath) {
-            return String.format(Locale.ROOT, "src/main/resources/templates%s", packPath);
+        public String getZipPath(String className) {
+            return String.format(Locale.ROOT, "src/main/resources/templates/%s/", className.toLowerCase());
+        }
+
+        @Override
+        public String getFileName(String className) {
+            return "edit.html";
         }
     },
     LAYUI_LIST("templates", "layui-list.ftl") {
         @Override
-        public String getZipPath(String packPath) {
-            return String.format(Locale.ROOT, "src/main/resources/templates%s", packPath);
+        public String getZipPath(String className) {
+            return String.format(Locale.ROOT, "src/main/resources/templates/%s/", className.toLowerCase());
+        }
+
+        @Override
+        public String getFileName(String className) {
+            return String.format(Locale.ROOT, "list.html");
         }
     };
     final String zipPath;
@@ -50,6 +75,8 @@ public enum LayUIJpaZipEnum {
     }
 
     public abstract String getZipPath(String packPath);
+
+    public abstract String getFileName(String className);
 
     public String getTemplatePath() {
         return FOLDER_PATH + this.templatePath;
