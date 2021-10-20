@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <link rel="stylesheet" href="/static/lib/layui/css/layui.css" type="text/css">
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="layui-form layuimini-form">
-    <input type="hidden" name="id" value="￥{id}" class="layui-input">
+    <input type="hidden" name="id" th:value="￥{id}" class="layui-input">
 
 
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
@@ -15,7 +15,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">${fieldItem.fieldComment}</label>
         <div class="layui-input-block">
-            <input type="text" name="${fieldItem.fieldName}" lay-verify="required" lay-reqtext="${fieldItem.fieldComment}不能为空" placeholder="请输入${fieldItem.fieldComment}" value="￥{${classInfo.className?uncap_first}.${fieldItem.fieldName}}" class="layui-input">
+            <input type="text" name="${fieldItem.fieldName}" lay-verify="required" lay-reqtext="${fieldItem.fieldComment}不能为空" placeholder="请输入${fieldItem.fieldComment}" th:value="￥{${classInfo.className?uncap_first}.${fieldItem.fieldName}}" class="layui-input">
             <#--<tip>${fieldItem.fieldComment}</tip>-->
         </div>
     </div>
@@ -29,7 +29,7 @@
     </div>
 </div>
 </div>
-<script>
+<script th:inline="none">
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <link rel="stylesheet" href="/static/lib/layui/css/layui.css" type="text/css">
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -71,7 +71,7 @@
         </script>
     </div>
 </div>
-<script>
+<script th:inline="none">
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
