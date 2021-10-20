@@ -102,7 +102,7 @@
                 {title: '创建时间', sort: true,templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
                 {title: '修改时间', sort: true,templet: "<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd')}}</div>"},
                 */
-                {title: '操作', minWidth: 400, templet: '#currentTableBar', fixed: "right", align: "center"}
+                {title: '操作', minWidth: 200, templet: '#currentTableBar', fixed: "right", align: "center"}
             ]],
             limits: [20, 50, 100],
             limit: 20,
@@ -171,7 +171,7 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['1000px', '700px'],
-                    content: '/${classInfo.className?uncap_first}/edit?id=' + obj.data.${classInfo.className?uncap_first}Id,
+                    content: '/${classInfo.className?uncap_first}/edit?id=' + obj.data.id,
                 });
                 return false;
             } else if (obj.event === 'delete') {
