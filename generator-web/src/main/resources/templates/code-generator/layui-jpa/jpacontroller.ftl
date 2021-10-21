@@ -6,11 +6,13 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,16 +22,27 @@ import java.util.Optional;
  * @author ${authorName}
  * @date ${.now?string('yyyy-MM-dd')}
  */
-@RestController
+@Controller
 @RequestMapping("/${classInfo.className?uncap_first}")
 public class ${classInfo.className}Controller {
 
     @Autowired
     private ${classInfo.className}Repository ${classInfo.className?uncap_first}Repository;
 
+    @GetMapping("/list")
+    public String listPage(){
+        return "${classInfo.className}/list";
+    }
+
+    @GetMapping("/edit")
+    public String edit(int id){
+        return "${classInfo.className}/edit";
+    }
+
     /**
     * 新增或编辑
     */
+    @ResponseBody
     @PostMapping("/save")
     public Object save(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
@@ -39,6 +52,7 @@ public class ${classInfo.className}Controller {
     * 删除
     */
     @PostMapping("/delete")
+    @ResponseBody
     public Object delete(int id){
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
@@ -53,6 +67,7 @@ public class ${classInfo.className}Controller {
     * 查询
     */
     @PostMapping("/find")
+    @ResponseBody
     public Object find(int id){
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
@@ -65,7 +80,8 @@ public class ${classInfo.className}Controller {
     /**
     * 分页查询
     */
-    @PostMapping("/list")
+    @PostMapping("/page/list")
+    @ResponseBody
     public Object list(${classInfo.className} ${classInfo.className?uncap_first},
                         @RequestParam(required = false, defaultValue = "0") int pageNumber,
                         @RequestParam(required = false, defaultValue = "10") int pageSize) {
