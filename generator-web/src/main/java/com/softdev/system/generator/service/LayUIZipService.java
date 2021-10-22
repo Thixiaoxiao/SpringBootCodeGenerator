@@ -42,6 +42,11 @@ public class LayUIZipService {
                 LayUIJpaZipEnum.LAYUI_LIST.getFileName(className),
                 LayUIJpaZipEnum.LAYUI_LIST.getData(paramInfo)
         ));
+        result.add(getMap(
+                LayUIJpaZipEnum.RESPONSE.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIJpaZipEnum.RESPONSE.getFileName(className),
+                LayUIJpaZipEnum.RESPONSE.getData(paramInfo)
+        ));
         return result;
     }
 

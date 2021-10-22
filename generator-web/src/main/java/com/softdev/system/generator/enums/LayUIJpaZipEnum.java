@@ -9,7 +9,17 @@ import java.io.IOException;
 import java.util.Locale;
 
 public enum LayUIJpaZipEnum {
+    RESPONSE("responseEntity", "response-entity.ftl") {
+        @Override
+        public String getZipPath(String packPath) {
+            return String.format(Locale.ROOT, "src/main/java%sentity/", packPath);
+        }
 
+        @Override
+        public String getFileName(String className) {
+            return "ResponseForLayUIEntity.java";
+        }
+    },
     ENTITY("entity", "entity.ftl") {
         @Override
         public String getZipPath(String packPath) {

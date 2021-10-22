@@ -1,6 +1,7 @@
 <#if isWithPackage?exists && isWithPackage==true>package ${packageName}.controller;</#if>
 <#if isAutoImport?exists && isAutoImport==true>
 import ${packageName}.entity.${classInfo.className};
+import ${packageName}.entity.ResponseForLayUIEntity;
 import ${packageName}.repository.${classInfo.className}Repository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
@@ -57,9 +58,9 @@ public class ${classInfo.className}Controller {
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
             ${classInfo.className?uncap_first}Repository.deleteById(id);
-            return ${returnUtilSuccess}("删除成功");
+            return ResponseForLayUIEntity.success("删除成功");
         }else{
-            return ${returnUtilFailure}("没有找到该对象");
+            return ResponseForLayUIEntity.fail("没有找到该对象");
         }
     }
 
@@ -71,9 +72,9 @@ public class ${classInfo.className}Controller {
     public Object find(int id){
         Optional<${classInfo.className}> ${classInfo.className?uncap_first}=${classInfo.className?uncap_first}Repository.findById(id);
         if(${classInfo.className?uncap_first}.isPresent()){
-            return ${returnUtilSuccess}(${classInfo.className?uncap_first}.get());
+            return ResponseForLayUIEntity.success(${classInfo.className?uncap_first}.get());
         }else{
-            return ${returnUtilFailure}("没有找到该对象");
+            return ResponseForLayUIEntity.fail("没有找到该对象");
         }
     }
 

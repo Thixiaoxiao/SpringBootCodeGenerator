@@ -44,7 +44,7 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (responseData) {
-                    if (responseData.code === 200) {
+                    if (responseData.code === 0) {
                         layer.msg(responseData.msg, function () {
                             // 关闭弹出层
                             //layer.close(index);
