@@ -80,7 +80,7 @@
         table.render({
             elem: '#currentTableId',
             method: 'post',
-            url: '/${classInfo.className?uncap_first}/list',
+            url: '/${classInfo.className?uncap_first}/page/list',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
