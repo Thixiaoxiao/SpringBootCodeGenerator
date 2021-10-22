@@ -31,12 +31,12 @@ public class ${classInfo.className}Controller {
 
     @GetMapping("/list")
     public String listPage(){
-        return "${classInfo.className}/list";
+        return "${classInfo.className?lower_case}/list";
     }
 
     @GetMapping("/edit")
     public String edit(int id){
-        return "${classInfo.className}/edit";
+        return "${classInfo.className?lower_case}/edit";
     }
 
     /**
