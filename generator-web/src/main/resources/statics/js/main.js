@@ -209,7 +209,7 @@ function setAllCookie() {
 }
 
 function setOneCookie(key) {
-	setCookie(key, vm.formData.options[key], 604800);
+	setCookie(key, vm.formData.options[key]);
 }
 
 /**
