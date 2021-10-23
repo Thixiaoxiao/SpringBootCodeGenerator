@@ -92,8 +92,8 @@ public class ${classInfo.className}Controller {
     @PostMapping("/page/list")
     @ResponseBody
     public Object list(${classInfo.className} ${classInfo.className?uncap_first},
-                        @RequestParam(required = false, defaultValue = "0") int pageNumber,
-                        @RequestParam(required = false, defaultValue = "10") int pageSize) {
+                        @RequestParam(required = false, defaultValue = "0") int page,
+                        @RequestParam(required = false, defaultValue = "10") int limit) {
 
             //创建匹配器，需要查询条件请修改此处代码
             ExampleMatcher matcher = ExampleMatcher.matchingAll();
@@ -101,9 +101,9 @@ public class ${classInfo.className}Controller {
             //创建实例
             Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
             //分页构造
-            Pageable pageable = PageRequest.of(pageNumber,pageSize);
-            Page<${classInfo.className}> page = ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
-            return ResponseForLayUIEntity.success(page.getContent(), (int) page.getTotalElements());
+            Pageable pageable = PageRequest.of(page - 1, limit);
+            Page<${classInfo.className}> page1 = ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
+            return ResponseForLayUIEntity.success(page1.getContent(), (int) page1.getTotalElements());
     }
 
 }
