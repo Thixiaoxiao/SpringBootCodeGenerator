@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,9 +51,6 @@ public class ZipController {
         paramInfo.getOptions().put("classInfo", classInfo);
         paramInfo.getOptions().put("tableName", classInfo == null ? System.currentTimeMillis() : classInfo.getTableName());
 
-
-        System.out.println(paramInfo);
-
         response.reset();
         response.setContentType("application/octet-stream");
         String filename = "layui.jpa.zip";
@@ -63,35 +58,7 @@ public class ZipController {
         ServletOutputStream outputStream = response.getOutputStream();
 
         List<Map<String, String>> list = layUIJpaZipService.generateList(paramInfo);
-//        List<Map<String, String>> list = new ArrayList<>();
-
-//
-//        Map m1 = new HashMap() {{
-//            put("path", "/f1/f2/f3/");
-//            put("name", "1.txt");
-//            put("data", "abcdefg");
-//        }};
-
-//        Map m2 = new HashMap() {{
-//            put("path", "/f1/f2/f3/f4/");
-//            put("name", "2.txt");
-//            put("data", "abcdefg");
-//        }};
-//
-//        Map m3 = new HashMap() {{
-//            put("path", "");
-//            put("name", "3.txt");
-//            put("data", "abcdefg");
-//        }};
-//
-//        list.add(m1);
-//
-//        list.add(m2);
-//
-//        list.add(m3);
-
         toZip(list, outputStream);
-
         if (outputStream != null) {
             outputStream.close();
         }
