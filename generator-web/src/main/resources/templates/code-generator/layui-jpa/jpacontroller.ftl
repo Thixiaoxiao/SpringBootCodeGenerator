@@ -5,8 +5,10 @@ import ${packageName}.entity.ResponseForLayUIEntity;
 import ${packageName}.repository.${classInfo.className}Repository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.HashMap;
 </#if>
 /**
  * @description ${classInfo.classComment}
@@ -36,7 +39,12 @@ public class ${classInfo.className}Controller {
     }
 
     @GetMapping("/edit")
-    public String edit(int id){
+    public String edit(@RequestParam int id, HashMap<String, Object> hashMap){
+        ${classInfo.className} ${classInfo.className?uncap_first}1 = new ${classInfo.className}();
+        ${classInfo.className?uncap_first}1.setId(id);
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).orElse(${classInfo.className?uncap_first}1);
+        hashMap.put("${classInfo.className?uncap_first}", ${classInfo.className?uncap_first});
+        hashMap.put("id", id);
         return "${classInfo.className?lower_case}/edit";
     }
 
@@ -45,8 +53,8 @@ public class ${classInfo.className}Controller {
     */
     @ResponseBody
     @PostMapping("/save")
-    public Object save(${classInfo.className} ${classInfo.className?uncap_first}){
-        return ${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first});
+    public Object save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+        return ResponseForLayUIEntity.success(${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first}));
     }
 
     /**
@@ -94,8 +102,8 @@ public class ${classInfo.className}Controller {
             Example<${classInfo.className}> example = Example.of(${classInfo.className?uncap_first}, matcher);
             //分页构造
             Pageable pageable = PageRequest.of(pageNumber,pageSize);
-
-            return ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
+            Page<${classInfo.className}> page = ${classInfo.className?uncap_first}Repository.findAll(example, pageable);
+            return ResponseForLayUIEntity.success(page.getContent(), (int) page.getTotalElements());
     }
 
 }

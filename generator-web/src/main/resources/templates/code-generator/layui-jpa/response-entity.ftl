@@ -18,12 +18,21 @@ public class ResponseForLayUIEntity<T> {
     private String msg;
     private T data;
 
-    public static ResponseForLayUIEntity success(T data) {
+    public static <T> ResponseForLayUIEntity success(T data) {
         return ResponseForLayUIEntity.builder()
             .data(data)
             .msg("success")
             .code(SUCCESS)
             .build();
+    }
+
+    public static <T> ResponseForLayUIEntity success(T data, Integer count) {
+        return ResponseForLayUIEntity.builder()
+                .data(data)
+                .msg("success")
+                .code(SUCCESS)
+                .count(count)
+                .build();
     }
 
     public static ResponseForLayUIEntity fail(String msg) {

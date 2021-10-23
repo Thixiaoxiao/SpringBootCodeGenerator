@@ -32,7 +32,7 @@ const vm = new Vue({
 	data: {
 		formData: {
 			tableSql: "CREATE TABLE 'sys_user_info' (\n" +
-				"  'user_id' int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',\n" +
+				"  'id' int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',\n" +
 				"  'user_name' varchar(255) NOT NULL COMMENT '用户名',\n" +
 				"  'status' tinyint(1) NOT NULL COMMENT '状态',\n" +
 				"  'create_time' datetime NOT NULL COMMENT '创建时间',\n" +
