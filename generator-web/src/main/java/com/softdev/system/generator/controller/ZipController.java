@@ -57,7 +57,7 @@ public class ZipController {
         response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(filename, "UTF-8"));
         ServletOutputStream outputStream = response.getOutputStream();
 
-        List<Map<String, String>> list = layUIJpaZipService.generateList(paramInfo);
+        List<Map<String, String>> list = layUIJpaZipService.generateLayUIJpaList(paramInfo);
         toZip(list, outputStream);
         if (outputStream != null) {
             outputStream.close();

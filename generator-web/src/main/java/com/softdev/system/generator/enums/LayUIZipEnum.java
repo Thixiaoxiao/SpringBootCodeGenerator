@@ -8,7 +8,7 @@ import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.Locale;
 
-public enum LayUIJpaZipEnum {
+public enum LayUIZipEnum {
     RESPONSE("responseEntity", "response-entity.ftl") {
         @Override
         public String getZipPath(String packPath) {
@@ -77,9 +77,9 @@ public enum LayUIJpaZipEnum {
     };
     final String zipPath;
     final String templatePath;
-    private static final String FOLDER_PATH = "layui-jpa/";
+    private static final String FOLDER_PATH = "layui-zip/";
 
-    LayUIJpaZipEnum(String zipPath, String templatePath) {
+    LayUIZipEnum(String zipPath, String templatePath) {
         this.zipPath = zipPath;
         this.templatePath = templatePath;
     }

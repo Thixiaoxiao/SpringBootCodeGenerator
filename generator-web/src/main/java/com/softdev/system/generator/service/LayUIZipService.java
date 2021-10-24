@@ -2,7 +2,7 @@ package com.softdev.system.generator.service;
 
 import com.softdev.system.generator.entity.ClassInfo;
 import com.softdev.system.generator.entity.ParamInfo;
-import com.softdev.system.generator.enums.LayUIJpaZipEnum;
+import com.softdev.system.generator.enums.LayUIZipEnum;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
 
@@ -12,40 +12,40 @@ import java.util.*;
 @Service
 public class LayUIZipService {
 
-    public List<Map<String, String>> generateList(ParamInfo paramInfo) throws IOException, TemplateException {
+    public List<Map<String, String>> generateLayUIJpaList(ParamInfo paramInfo) throws IOException, TemplateException {
         Map<String, Object> options = paramInfo.getOptions();
         String className = ((ClassInfo) options.get("classInfo")).getClassName();
         String packageName = options.get("packageName").toString();
         ArrayList<Map<String, String>> result = new ArrayList<>();
         result.add(getMap(
-                LayUIJpaZipEnum.ENTITY.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
-                LayUIJpaZipEnum.ENTITY.getFileName(className),
-                LayUIJpaZipEnum.ENTITY.getData(paramInfo)
+                LayUIZipEnum.ENTITY.getZipPath(LayUIZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIZipEnum.ENTITY.getFileName(className),
+                LayUIZipEnum.ENTITY.getData(paramInfo)
         ));
         result.add(getMap(
-                LayUIJpaZipEnum.CONTROLLER.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
-                LayUIJpaZipEnum.CONTROLLER.getFileName(className),
-                LayUIJpaZipEnum.CONTROLLER.getData(paramInfo)
+                LayUIZipEnum.CONTROLLER.getZipPath(LayUIZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIZipEnum.CONTROLLER.getFileName(className),
+                LayUIZipEnum.CONTROLLER.getData(paramInfo)
         ));
         result.add(getMap(
-                LayUIJpaZipEnum.REPOSITORY.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
-                LayUIJpaZipEnum.REPOSITORY.getFileName(className),
-                LayUIJpaZipEnum.REPOSITORY.getData(paramInfo)
+                LayUIZipEnum.REPOSITORY.getZipPath(LayUIZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIZipEnum.REPOSITORY.getFileName(className),
+                LayUIZipEnum.REPOSITORY.getData(paramInfo)
         ));
         result.add(getMap(
-                LayUIJpaZipEnum.LAYUI_EDIT.getZipPath(className),
-                LayUIJpaZipEnum.LAYUI_EDIT.getFileName(className),
-                LayUIJpaZipEnum.LAYUI_EDIT.getData(paramInfo)
+                LayUIZipEnum.LAYUI_EDIT.getZipPath(className),
+                LayUIZipEnum.LAYUI_EDIT.getFileName(className),
+                LayUIZipEnum.LAYUI_EDIT.getData(paramInfo)
         ));
         result.add(getMap(
-                LayUIJpaZipEnum.LAYUI_LIST.getZipPath(className),
-                LayUIJpaZipEnum.LAYUI_LIST.getFileName(className),
-                LayUIJpaZipEnum.LAYUI_LIST.getData(paramInfo)
+                LayUIZipEnum.LAYUI_LIST.getZipPath(className),
+                LayUIZipEnum.LAYUI_LIST.getFileName(className),
+                LayUIZipEnum.LAYUI_LIST.getData(paramInfo)
         ));
         result.add(getMap(
-                LayUIJpaZipEnum.RESPONSE.getZipPath(LayUIJpaZipEnum.ENTITY.getPackPath(packageName)),
-                LayUIJpaZipEnum.RESPONSE.getFileName(className),
-                LayUIJpaZipEnum.RESPONSE.getData(paramInfo)
+                LayUIZipEnum.RESPONSE.getZipPath(LayUIZipEnum.ENTITY.getPackPath(packageName)),
+                LayUIZipEnum.RESPONSE.getFileName(className),
+                LayUIZipEnum.RESPONSE.getData(paramInfo)
         ));
         return result;
     }
