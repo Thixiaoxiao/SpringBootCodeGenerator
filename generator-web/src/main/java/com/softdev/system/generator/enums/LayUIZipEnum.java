@@ -104,7 +104,7 @@ public enum LayUIZipEnum {
     MYBATIS_MODEL("model", "model.ftl") {
         @Override
         public String getZipPath(String packPath) {
-            return String.format(Locale.ROOT, "src/main/java%smodel/", packPath);
+            return String.format(Locale.ROOT, "src/main/java%sentity/", packPath);
         }
 
         @Override

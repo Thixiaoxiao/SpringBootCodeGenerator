@@ -1,6 +1,9 @@
 <#if isWithPackage?exists && isWithPackage==true>package ${packageName}.controller;</#if>
 
 <#if isAutoImport?exists && isAutoImport==true>
+import ${packageName}.entity.${classInfo.className};
+import ${packageName}.entity.ResponseForLayUIEntity;
+import ${packageName}.services.${classInfo.className}Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +20,7 @@ import java.util.Map;
  * @author ${authorName}
  * @date ${.now?string('yyyy-MM-dd')}
  */
-@RestController
+@Controller
 @RequestMapping(value = "/${classInfo.className?uncap_first}")
 public class ${classInfo.className}Controller {
 
@@ -29,6 +32,7 @@ public class ${classInfo.className}Controller {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
+    @ResponseBody
     @RequestMapping("/insert")
     public Object insert(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
@@ -39,6 +43,7 @@ public class ${classInfo.className}Controller {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
+    @ResponseBody
     @RequestMapping("/delete")
     public Object delete(int id){
         return ${classInfo.className?uncap_first}Service.delete(id);
@@ -49,6 +54,7 @@ public class ${classInfo.className}Controller {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
+    @ResponseBody
     @RequestMapping("/update")
     public Object update(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
@@ -59,6 +65,7 @@ public class ${classInfo.className}Controller {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
+    @ResponseBody
     @RequestMapping("/load")
     public Object load(int id){
         return ${classInfo.className?uncap_first}Service.load(id);
@@ -69,6 +76,7 @@ public class ${classInfo.className}Controller {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
+    @ResponseBody
     @RequestMapping("/pageList")
     public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
                                         @RequestParam(required = false, defaultValue = "10") int pagesize) {
