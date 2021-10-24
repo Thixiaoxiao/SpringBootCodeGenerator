@@ -63,4 +63,44 @@ public class ZipController {
             outputStream.close();
         }
     }
+
+    @RequestMapping("/download/layui.mybatis.zip")
+    public void downloadLocalMybatis(
+            @RequestParam(required = false) String paramInfoStr,
+            HttpServletResponse response) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        ParamInfo paramInfo = mapper.readValue(paramInfoStr, ParamInfo.class);
+
+        //1.Parse Table Structure 表结构解析
+        ClassInfo classInfo = null;
+        String dataType = MapUtil.getString(paramInfo.getOptions(), "dataType");
+        if ("sql".equals(dataType) || dataType == null) {
+            classInfo = TableParseUtil.processTableIntoClassInfo(paramInfo);
+        } else if ("json".equals(dataType)) {
+            //JSON模式：parse field from json string
+            classInfo = TableParseUtil.processJsonToClassInfo(paramInfo);
+            //INSERT SQL模式：parse field from insert sql
+        } else if ("insert-sql".equals(dataType)) {
+            classInfo = TableParseUtil.processInsertSqlToClassInfo(paramInfo);
+            //正则表达式模式（非完善版本）：parse sql by regex
+        } else if ("sql-regex".equals(dataType)) {
+            classInfo = TableParseUtil.processTableToClassInfoByRegex(paramInfo);
+            //默认模式：default parse sql by java
+        }
+        //2.Set the params 设置表格参数
+        paramInfo.getOptions().put("classInfo", classInfo);
+        paramInfo.getOptions().put("tableName", classInfo == null ? System.currentTimeMillis() : classInfo.getTableName());
+
+        response.reset();
+        response.setContentType("application/octet-stream");
+        String filename = "layui.mybatis.zip";
+        response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(filename, "UTF-8"));
+        ServletOutputStream outputStream = response.getOutputStream();
+
+        List<Map<String, String>> list = layUIJpaZipService.generateLayUIMyBatisList(paramInfo);
+        toZip(list, outputStream);
+        if (outputStream != null) {
+            outputStream.close();
+        }
+    }
 }

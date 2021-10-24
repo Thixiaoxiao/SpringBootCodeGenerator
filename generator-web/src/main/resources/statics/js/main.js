@@ -145,40 +145,7 @@ const vm = new Vue({
 		generate_layui_mybatis_zip : function(){
 			//get value from codemirror
 			vm.formData.tableSql=$.inputArea.getValue();
-            axios({
-                method: 'post',
-                url: '/generator/download/layui.jpa.zip',
-                data: vm.formData,
-                headers: {
-                    // Accept: 'application/json'
-                },
-                responseType: 'blob'
-            }).then(response => {
-                let data = response.data;
-            let fileReader = new FileReader();
-            fileReader.onload = function() {
-                try {
-                    let jsonData = JSON.parse(this.result);  // 说明是普通对象数据，后台转换失败
-                    if (jsonData.code) {
-                        that.$message.error(jsonData.message)
-                    }
-                } catch (err) {   // 解析成对象失败，说明是正常的文件流
-                    const blob = new Blob([response.data], {type: 'application/zip'});
-                    const filename = response.headers['content-disposition'];
-                    const downloadElement = document.createElement('a');
-                    const href = window.URL.createObjectURL(blob); //创建下载的链接
-                    downloadElement.href = href;
-                    [downloadElement.download] = [filename.split('=')[1]];
-                    document.body.appendChild(downloadElement);
-                    downloadElement.click(); //点击下载
-                    document.body.removeChild(downloadElement); //下载完成移除元素
-                    window.URL.revokeObjectURL(href); //释放blob对
-                }
-            };
-            fileReader.readAsText(data)
-        }).catch((error) => {
-
-            })
+			window.open("/generator/download/layui.mybatis.zip?paramInfoStr="+ encodeURI(JSON.stringify(vm.formData)));
 		},
 		copy : function (){
 			navigator.clipboard.writeText(vm.outputStr.trim()).then(r => {alert("已复制")});
