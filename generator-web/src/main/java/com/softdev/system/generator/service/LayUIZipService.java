@@ -49,6 +49,7 @@ public class LayUIZipService {
         ));
         return result;
     }
+
     public List<Map<String, String>> generateLayUIMyBatisList(ParamInfo paramInfo) throws IOException, TemplateException {
         Map<String, Object> options = paramInfo.getOptions();
         String className = ((ClassInfo) options.get("classInfo")).getClassName();
@@ -102,6 +103,7 @@ public class LayUIZipService {
         ));
         return result;
     }
+
     private Map<String, String> getMap(String path, String name, String data) {
         return new HashMap<String, String>() {{
             put("path", path);
