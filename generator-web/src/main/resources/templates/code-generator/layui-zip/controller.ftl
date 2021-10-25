@@ -27,6 +27,21 @@ public class ${classInfo.className}Controller {
     @Resource
     private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
 
+    @GetMapping("/list")
+    public String listPage(){
+        return "${classInfo.className?lower_case}/list";
+    }
+
+    @GetMapping("/edit")
+    public String edit(@RequestParam int id, HashMap<String, Object> hashMap){
+        ${classInfo.className} ${classInfo.className?uncap_first}1 = new ${classInfo.className}();
+        ${classInfo.className?uncap_first}1.setId(id);
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).orElse(${classInfo.className?uncap_first}1);
+        hashMap.put("${classInfo.className?uncap_first}", ${classInfo.className?uncap_first});
+        hashMap.put("id", id);
+        return "${classInfo.className?lower_case}/edit";
+    }
+
     /**
     * 新增
     * @author ${authorName}
