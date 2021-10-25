@@ -112,10 +112,10 @@ public class ${classInfo.className}Controller {
     * @date ${.now?string('yyyy/MM/dd')}
     **/
     @ResponseBody
-    @RequestMapping("/pageList")
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
-                                        @RequestParam(required = false, defaultValue = "10") int pagesize) {
-        return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
+    @RequestMapping("/page/list")
+    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "1") int page,
+                                        @RequestParam(required = false, defaultValue = "10") int limit) {
+        return ${classInfo.className?uncap_first}Service.pageList(page * limit - limit, limit);
     }
 
 }

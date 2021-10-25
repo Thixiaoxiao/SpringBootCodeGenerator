@@ -78,7 +78,7 @@
     <select id="pageList" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List" />
         FROM ${classInfo.originTableName}
-        LIMIT ${r"#{offset}"}, ${r"#{pageSize}"}
+        LIMIT ${r"#{offset}"}, ${r"#{pagesize}"}
     </select>
 
     <select id="pageListCount" resultType="java.lang.Integer">
