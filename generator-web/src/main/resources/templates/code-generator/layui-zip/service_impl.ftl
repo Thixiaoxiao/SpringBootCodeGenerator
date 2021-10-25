@@ -4,6 +4,8 @@
 
 import ${packageName}.entity.${classInfo.className};
 
+import ${packageName}.services.${classInfo.className}Service;
+
 import ${packageName}.dao.${classInfo.className}Mapper;
 
 import org.springframework.stereotype.Service;
