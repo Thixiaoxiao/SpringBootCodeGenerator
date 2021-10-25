@@ -2,6 +2,9 @@
 
 <#if isAutoImport?exists && isAutoImport==true>
 import java.util.Map;
+
+import ${packageName}.entity.${classInfo.className};
+
 </#if>
 /**
  * @description ${classInfo.classComment}
