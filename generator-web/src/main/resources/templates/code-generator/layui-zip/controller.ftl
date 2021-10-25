@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 </#if>
 
 /**
@@ -34,12 +36,30 @@ public class ${classInfo.className}Controller {
 
     @GetMapping("/edit")
     public String edit(@RequestParam int id, HashMap<String, Object> hashMap){
-        ${classInfo.className} ${classInfo.className?uncap_first}1 = new ${classInfo.className}();
-        ${classInfo.className?uncap_first}1.setId(id);
-        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Repository.findById(id).orElse(${classInfo.className?uncap_first}1);
+        ${classInfo.className} ${classInfo.className?uncap_first} = ${classInfo.className?uncap_first}Service.load(id);
+        if (null == ${classInfo.className?uncap_first}) {
+            ${classInfo.className?uncap_first} = new ${classInfo.className}();
+            ${classInfo.className?uncap_first}.setId(0);
+        }
         hashMap.put("${classInfo.className?uncap_first}", ${classInfo.className?uncap_first});
         hashMap.put("id", id);
         return "${classInfo.className?lower_case}/edit";
+    }
+
+    /**
+    * 新增 或 修改
+    * @author ${authorName}
+    * @date ${.now?string('yyyy/MM/dd')}
+    **/
+    @ResponseBody
+    @RequestMapping("/save")
+    public Object save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
+        if (${classInfo.className?uncap_first}.getId().equals(0)) {
+            ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
+        } else {
+            ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
+        }
+        return ResponseForLayUIEntity.success("success");
     }
 
     /**

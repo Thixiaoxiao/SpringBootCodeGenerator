@@ -28,29 +28,21 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 
 
 	@Override
-	public Object insert(${classInfo.className} ${classInfo.className?uncap_first}) {
-
-		// valid
-		if (${classInfo.className?uncap_first} == null) {
-			return ${returnUtilFailure}("必要参数缺失");
-        }
-
+	public ${classInfo.className} insert(${classInfo.className} ${classInfo.className?uncap_first}) {
 		${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
-        return ${returnUtilSuccess}();
+        return ${classInfo.className?uncap_first};
 	}
 
 
 	@Override
-	public Object delete(int id) {
-		int ret = ${classInfo.className?uncap_first}Mapper.delete(id);
-		return ret>0?${returnUtilSuccess}():${returnUtilFailure}();
+	public int delete(int id) {
+		return ${classInfo.className?uncap_first}Mapper.delete(id);
 	}
 
 
 	@Override
-	public Object update(${classInfo.className} ${classInfo.className?uncap_first}) {
-		int ret = ${classInfo.className?uncap_first}Mapper.update(${classInfo.className?uncap_first});
-		return ret>0?${returnUtilSuccess}():${returnUtilFailure}();
+	public int update(${classInfo.className} ${classInfo.className?uncap_first}) {
+		return ${classInfo.className?uncap_first}Mapper.update(${classInfo.className?uncap_first});
 	}
 
 
