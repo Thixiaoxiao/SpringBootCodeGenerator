@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+
+import ${packageName}.entity.${classInfo.className};
+
 </#if>
 
 /**
