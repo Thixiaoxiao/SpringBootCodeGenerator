@@ -1,6 +1,9 @@
 <#if isWithPackage?exists && isWithPackage==true>package ${packageName}.services.impl;</#if>
 
 <#if isAutoImport?exists && isAutoImport==true>
+
+import ${packageName}.entity.${classInfo.className};
+
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
