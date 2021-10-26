@@ -81,7 +81,7 @@ public class ${classInfo.className}Controller {
     @ResponseBody
     @RequestMapping("/delete")
     public Object delete(int id){
-        return ${classInfo.className?uncap_first}Service.delete(id);
+        return ResponseForLayUIEntity.success(${classInfo.className?uncap_first}Service.delete(id));
     }
 
     /**
