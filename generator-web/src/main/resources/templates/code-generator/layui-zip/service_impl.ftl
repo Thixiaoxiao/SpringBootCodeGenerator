@@ -60,8 +60,9 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 
 		// result
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("pageList", pageList);
-		result.put("totalCount", totalCount);
+		result.put("data", pageList);
+		result.put("count", totalCount);
+                result.put("code",0);
 
 		return result;
 	}
