@@ -181,7 +181,7 @@
                         url: "/${classInfo.className?uncap_first}/delete",
                         data: {"id": obj.data.id},
                         success: function (responseData) {
-                            if (responseData.code === 200) {
+                            if (responseData.code === 0) {
                                 layer.msg(responseData.msg, function () {
                                     obj.del();
                                 });
